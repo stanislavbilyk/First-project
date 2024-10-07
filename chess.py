@@ -1,7 +1,7 @@
 class Chess:
     color: str = "white"
-    x: int = 3
-    y: int = 5
+    x: int = 5
+    y: int = 3
     def change_color(self):
         self.color = "black"
 
@@ -26,10 +26,16 @@ class Chess:
 class Pawn(Chess):
     def check_move(self, x: int, y: int) -> bool:
         self._chessboard(x, y)
-        if x == self.x and y == self.y + 1:
-            return True
-        else:
-            return False
+        if self.color == "white":
+            if x == self.x and y == self.y + 1:
+                return True
+            else:
+                return False
+        if self.color == "black":
+            if x == self.x and y == self.y - 1:
+                return True
+            else:
+                return False
 
 class Rook(Chess):
     def check_move(self, x: int, y: int) -> bool:
@@ -90,30 +96,16 @@ knight = Knight()
 queen = Queen()
 king = King()
 
+
 figures = [pawn, rook, bishop, knight, queen, king]
-print(figures)
 
 new_list = []
 def lets_play(x: int, y: int, f: list) -> list:
     for figure in f:
         if figure.check_move(x, y) == True:
             new_list.append(figure.__class__.__name__)
-
-
-lets_play(1, 4, figures)
+lets_play(3, 4, figures)
 print(new_list)
-# print(knight.check_move(1, 9))
 
 
-# def change_place(self, x: int, y: int) -> None:
-#     if x < 0 and x > 8:
-#         raise ValueError("x must be between 0 and 8")
-#     else:
-#         self.x = x
-#     if y < 0 and y > 8:
-#         raise ValueError("y must be between 0 and 8")
-#     else:
-#         self.y = y
 
-# queen.change_place(2, 8)
-# print(queen.x, queen.y)
